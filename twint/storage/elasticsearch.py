@@ -196,6 +196,15 @@ def weekday(day):
 def Tweet(Tweet, config):
     global _index_tweet_status
     global _is_near_def
+    try:
+        date_obj = datetime.strptime(Tweet.datetime, "%Y-%m-%d %H:%M:%S %Z")
+    except ValueError as v:
+        if len(v.args) > 0 and v.args[0].startswith('unconverted data remains: '):
+            line = Tweet.datetime[:-(len(v.args[0]) - 26)]
+            date_obj = datetime.strptime(line, "%Y-%m-%d %H:%M:%S %Z")
+        else:
+            raise
+
     date_obj = datetime.strptime(Tweet.datetime, "%Y-%m-%d %H:%M:%S %Z")
 
     actions = []
