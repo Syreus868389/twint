@@ -205,8 +205,6 @@ def Tweet(Tweet, config):
         else:
             raise
 
-    date_obj = datetime.strptime(Tweet.datetime, "%Y-%m-%d %H:%M:%S %Z")
-
     actions = []
 
     try:
